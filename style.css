@@ -293,3 +293,58 @@ button:hover {
   border: 1px solid #bbf7d0;
   color: #374151;
 }
+
+/*CLIENTES*/
+.pagina-container {
+  padding: 30px;
+  color: white;
+}
+
+.topo-pagina {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.topo-pagina h1 {
+  font-size: 28px;
+}
+
+.btn-voltar {
+  background-color: #ffffff;
+  color: #0b7a33;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.lista-clientes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cliente-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  backdrop-filter: blur(5px);
+}
+
+.cliente-card h2 {
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.cliente-card p {
+  margin: 8px 0;
+}
+
+.vazio {
+  text-align: center;
+  width: 100%;
+}
