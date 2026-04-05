@@ -1,6 +1,8 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerenciamento PetShop</title>
   <link rel="stylesheet" href="style.css">
@@ -32,29 +34,48 @@
       <div class="card">
         <i class="fa-solid fa-user"></i>
         <h3>Clientes</h3>
-        <p>120 cadastrados</p>
+        <input type="text" placeholder="Nome do cliente">
+        <input type="text" placeholder="Telefone">
+        <button>Salvar Cliente</button>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-dog"></i>
         <h3>Pets</h3>
-        <p>185 cadastrados</p>
+        <input type="text" placeholder="Nome do pet">
+        <input type="text" placeholder="Raça">
+        <button>Salvar Pet</button>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-calendar-check"></i>
         <h3>Agendamentos</h3>
-        <p>32 hoje</p>
+        <input type="date">
+        <input type="time">
+        <button>Salvar Agendamento</button>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-money-bill-wave"></i>
-        <h3>Faturamento</h3>
-        <p>R$ 4.500</p>
+        <h3>Pagamentos</h3>
+        <input type="text" placeholder="Valor do serviço">
+        <input type="text" placeholder="Forma de pagamento">
+        <button>Salvar Pagamento</button>
       </div>
+    </div>
+
+    <div class="card" style="margin-top: 30px;">
+      <h3><i class="fa-solid fa-list"></i> Dados Salvos</h3>
+      <p>Aqui você poderá mostrar futuramente os dados cadastrados no sistema.</p>
+
+      <div id="listaClientes"></div>
+      <div id="listaPets"></div>
+      <div id="listaAgendamentos"></div>
+      <div id="listaPagamentos"></div>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+```
