@@ -33,39 +33,38 @@
       <div class="card">
         <i class="fa-solid fa-user"></i>
         <h3>Clientes</h3>
-        <input type="text" placeholder="Nome do cliente">
-        <input type="text" placeholder="Telefone">
-        <button>Salvar Cliente</button>
+        <input type="text" id="clienteNome" placeholder="Nome do cliente">
+        <input type="text" id="clienteTelefone" placeholder="Telefone">
+        <button id="salvarCliente">Salvar Cliente</button>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-dog"></i>
         <h3>Pets</h3>
-        <input type="text" placeholder="Nome do pet">
-        <input type="text" placeholder="Raça">
-        <button>Salvar Pet</button>
+        <input type="text" id="petNome" placeholder="Nome do pet">
+        <input type="text" id="petRaca" placeholder="Raça">
+        <button id="salvarPet">Salvar Pet</button>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-calendar-check"></i>
         <h3>Agendamentos</h3>
-        <input type="date">
-        <input type="time">
-        <button>Salvar Agendamento</button>
+        <input type="date" id="agendamentoData">
+        <input type="time" id="agendamentoHora">
+        <button id="salvarAgendamento">Salvar Agendamento</button>
       </div>
 
       <div class="card">
         <i class="fa-solid fa-money-bill-wave"></i>
         <h3>Pagamentos</h3>
-        <input type="text" placeholder="Valor do serviço">
-        <input type="text" placeholder="Forma de pagamento">
-        <button>Salvar Pagamento</button>
+        <input type="text" id="pagamentoValor" placeholder="Valor do serviço">
+        <input type="text" id="pagamentoForma" placeholder="Forma de pagamento">
+        <button id="salvarPagamento">Salvar Pagamento</button>
       </div>
     </div>
 
     <div class="card" style="margin-top: 30px;">
       <h3><i class="fa-solid fa-list"></i> Dados Salvos</h3>
-      <p>Aqui você poderá mostrar futuramente os dados cadastrados no sistema.</p>
 
       <div id="listaClientes"></div>
       <div id="listaPets"></div>
