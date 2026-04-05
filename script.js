@@ -1,95 +1,27 @@
-let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
-let animais = JSON.parse(localStorage.getItem('animais')) || [];
-let servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+const loginBtn = document.getElementById('loginBtn');
+const mensagem = document.getElementById('mensagem');
 
-function fazerLogin() {
-  const usuario = document.getElementById('usuario').value;
+loginBtn.addEventListener('click', function () {
+  const email = document.getElementById('email').value;
   const senha = document.getElementById('senha').value;
 
-  if(usuario === 'admin' && senha === '123') {
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('sistema').classList.remove('hidden');
-    carregarDados();
+  if (email === '' || senha === '') {
+    mensagem.textContent = 'Preencha todos os campos.';
+    mensagem.style.color = 'red';
   } else {
-    alert('Usuário ou senha inválidos');
+    mensagem.textContent = 'Login realizado com sucesso!';
+    mensagem.style.color = 'green';
+
+    setTimeout(() => {
+      window.location.href = 'gerenciamento.html';
+    }, 1500);
   }
-}
+});
 
-function cadastrarCliente() {
-  const nome = document.getElementById('nomeCliente').value;
-  const telefone = document.getElementById('telefoneCliente').value;
+const logoutBtn = document.getElementById('logoutBtn');
 
-  clientes.push({ nome, telefone });
-  localStorage.setItem('clientes', JSON.stringify(clientes));
-  carregarClientes();
-}
-
-function cadastrarAnimal() {
-  const nome = document.getElementById('nomeAnimal').value;
-  const tipo = document.getElementById('tipoAnimal').value;
-  const dono = document.getElementById('donoAnimal').value;
-
-  animais.push({ nome, tipo, dono });
-  localStorage.setItem('animais', JSON.stringify(animais));
-  carregarAnimais();
-}
-
-function registrarServico() {
-  const animal = document.getElementById('animalServico').value;
-  const servico = document.getElementById('tipoServico').value;
-  const data = document.getElementById('dataServico').value;
-
-  servicos.push({ animal, servico, data });
-  localStorage.setItem('servicos', JSON.stringify(servicos));
-  carregarServicos();
-}
-
-function carregarClientes() {
-  const lista = document.getElementById('listaClientes');
-  lista.innerHTML = '';
-
-  clientes.forEach(cliente => {
-    lista.innerHTML += `
-      <tr>
-        <td>${cliente.nome}</td>
-        <td>${cliente.telefone}</td>
-      </tr>
-    `;
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', function () {
+    window.location.href = 'index.html';
   });
-}
-
-function carregarAnimais() {
-  const lista = document.getElementById('listaAnimais');
-  lista.innerHTML = '';
-
-  animais.forEach(animal => {
-    lista.innerHTML += `
-      <tr>
-        <td>${animal.nome}</td>
-        <td>${animal.tipo}</td>
-        <td>${animal.dono}</td>
-      </tr>
-    `;
-  });
-}
-
-function carregarServicos() {
-  const lista = document.getElementById('listaServicos');
-  lista.innerHTML = '';
-
-  servicos.forEach(item => {
-    lista.innerHTML += `
-      <tr>
-        <td>${item.animal}</td>
-        <td>${item.servico}</td>
-        <td>${item.data}</td>
-      </tr>
-    `;
-  });
-}
-
-function carregarDados() {
-  carregarClientes();
-  carregarAnimais();
-  carregarServicos();
 }
