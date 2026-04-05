@@ -1,4 +1,19 @@
 let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
+let animais = JSON.parse(localStorage.getItem('animais')) || [];
+let servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+
+function fazerLogin() {
+  const usuario = document.getElementById('usuario').value;
+  const senha = document.getElementById('senha').value;
+
+  if(usuario === 'admin' && senha === '123') {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('sistema').classList.remove('hidden');
+    carregarDados();
+  } else {
+    alert('Usuário ou senha inválidos');
+  }
+}
 
 function cadastrarCliente() {
   const nome = document.getElementById('nomeCliente').value;
