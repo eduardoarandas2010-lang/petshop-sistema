@@ -21,6 +21,27 @@ if (loginBtn) {
 }
 
 const logoutBtn = document.getElementById('logoutBtn');
+const salvarTudoBtn = document.getElementById('salvarTudoBtn');
+const resultado = document.getElementById('resultado');
+
+if (loginBtn) {
+  loginBtn.addEventListener('click', function () {
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+
+    if (email === '' || senha === '') {
+      mensagem.textContent = 'Preencha todos os campos.';
+      mensagem.style.color = 'red';
+    } else {
+      mensagem.textContent = 'Login realizado com sucesso!';
+      mensagem.style.color = 'green';
+
+      setTimeout(() => {
+        window.location.href = 'gerenciamento.html';
+      }, 1500);
+    }
+  });
+}
 
 if (logoutBtn) {
   logoutBtn.addEventListener('click', function () {
@@ -28,51 +49,30 @@ if (logoutBtn) {
   });
 }
 
-const salvarCliente = document.getElementById('salvarCliente');
-const salvarPet = document.getElementById('salvarPet');
-const salvarAgendamento = document.getElementById('salvarAgendamento');
-const salvarPagamento = document.getElementById('salvarPagamento');
+if (salvarTudoBtn) {
+  salvarTudoBtn.addEventListener('click', function () {
+    const clienteNome = document.getElementById('clienteNome').value;
+    const clienteTelefone = document.getElementById('clienteTelefone').value;
+    const petNome = document.getElementById('petNome').value;
+    const petTipo = document.getElementById('petTipo').value;
+    const agendamentoData = document.getElementById('agendamentoData').value;
+    const agendamentoHora = document.getElementById('agendamentoHora').value;
+    const servico = document.getElementById('servico').value;
+    const valorPagamento = document.getElementById('valorPagamento').value;
+    const formaPagamento = document.getElementById('formaPagamento').value;
 
-if (salvarCliente) {
-  salvarCliente.addEventListener('click', function () {
-    const nome = document.getElementById('clienteNome').value;
-    const telefone = document.getElementById('clienteTelefone').value;
-
-    document.getElementById('listaClientes').innerHTML += `
-      <p><strong>Cliente:</strong> ${nome} - ${telefone}</p>
-    `;
-  });
-}
-
-if (salvarPet) {
-  salvarPet.addEventListener('click', function () {
-    const nome = document.getElementById('petNome').value;
-    const raca = document.getElementById('petRaca').value;
-
-    document.getElementById('listaPets').innerHTML += `
-      <p><strong>Pet:</strong> ${nome} - ${raca}</p>
-    `;
-  });
-}
-
-if (salvarAgendamento) {
-  salvarAgendamento.addEventListener('click', function () {
-    const data = document.getElementById('agendamentoData').value;
-    const hora = document.getElementById('agendamentoHora').value;
-
-    document.getElementById('listaAgendamentos').innerHTML += `
-      <p><strong>Agendamento:</strong> ${data} às ${hora}</p>
-    `;
-  });
-}
-
-if (salvarPagamento) {
-  salvarPagamento.addEventListener('click', function () {
-    const valor = document.getElementById('pagamentoValor').value;
-    const forma = document.getElementById('pagamentoForma').value;
-
-    document.getElementById('listaPagamentos').innerHTML += `
-      <p><strong>Pagamento:</strong> ${valor} - ${forma}</p>
+    resultado.innerHTML = `
+      <div class="resultado-card">
+        <p><strong>Cliente:</strong> ${clienteNome}</p>
+        <p><strong>Telefone:</strong> ${clienteTelefone}</p>
+        <p><strong>Pet:</strong> ${petNome}</p>
+        <p><strong>Tipo do Pet:</strong> ${petTipo}</p>
+        <p><strong>Data:</strong> ${agendamentoData}</p>
+        <p><strong>Hora:</strong> ${agendamentoHora}</p>
+        <p><strong>Serviço:</strong> ${servico}</p>
+        <p><strong>Valor:</strong> R$ ${valorPagamento}</p>
+        <p><strong>Pagamento:</strong> ${formaPagamento}</p>
+      </div>
     `;
   });
 }
