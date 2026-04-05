@@ -1,101 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema Pet Shop</title>
+  <title>Login PetShop</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-  <div id="loginScreen" class="login card">
-    <div class="login-icon">
-      <i class="fas fa-paw"></i>
-    </div>
-    <h1>Login Pet Shop</h1>
-    <input type="text" id="usuario" placeholder="Usuário">
+  <div class="login-container">
+    <div class="icon">🐾</div>
+    <h1>PetShop Manager</h1>
+
+    <input type="email" id="email" placeholder="E-mail">
     <input type="password" id="senha" placeholder="Senha">
-    <button onclick="fazerLogin()">Entrar</button>
-  </div>
 
-  <div id="sistema" class="container hidden">
-    <h1 class="titulo-principal">
-      <i class="fas fa-dog"></i>
-      Sistema de Gerenciamento de Pet Shop
-    </h1>
+    <button id="loginBtn">Entrar</button>
 
-    <div class="grid">
-      <div class="card">
-        <h2><i class="fas fa-user"></i> Cadastrar Cliente</h2>
-        <input type="text" id="nomeCliente" placeholder="Nome do cliente">
-        <input type="text" id="telefoneCliente" placeholder="Telefone">
-        <button onclick="cadastrarCliente()">Salvar Cliente</button>
-      </div>
-
-      <div class="card">
-        <h2><i class="fas fa-cat"></i> Cadastrar Animal</h2>
-        <input type="text" id="nomeAnimal" placeholder="Nome do animal">
-        <input type="text" id="tipoAnimal" placeholder="Tipo do animal">
-        <input type="text" id="donoAnimal" placeholder="Nome do dono">
-        <button onclick="cadastrarAnimal()">Salvar Animal</button>
-      </div>
-
-      <div class="card">
-        <h2><i class="fas fa-stethoscope"></i> Registrar Serviço</h2>
-        <input type="text" id="animalServico" placeholder="Nome do animal">
-        <select id="tipoServico">
-          <option>Banho</option>
-          <option>Tosa</option>
-          <option>Consulta</option>
-          <option>Vacina</option>
-        </select>
-        <input type="date" id="dataServico">
-        <button onclick="registrarServico()">Salvar Serviço</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2><i class="fas fa-address-book"></i> Clientes Cadastrados</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Telefone</th>
-          </tr>
-        </thead>
-        <tbody id="listaClientes"></tbody>
-      </table>
-    </div>
-
-    <div class="card">
-      <h2><i class="fas fa-dog"></i> Animais Cadastrados</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Tipo</th>
-            <th>Dono</th>
-          </tr>
-        </thead>
-        <tbody id="listaAnimais"></tbody>
-      </table>
-    </div>
-
-    <div class="card">
-      <h2><i class="fas fa-notes-medical"></i> Histórico de Serviços</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Animal</th>
-            <th>Serviço</th>
-            <th>Data</th>
-          </tr>
-        </thead>
-        <tbody id="listaServicos"></tbody>
-      </table>
-    </div>
+    <p id="mensagem"></p>
   </div>
 
   <script src="script.js"></script>
