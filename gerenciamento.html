@@ -30,49 +30,55 @@
     </div>
 
     <div class="cards">
-      <div class="card">
-        <i class="fa-solid fa-user"></i>
+      <div class="card form-card">
         <h3>Clientes</h3>
         <input type="text" id="clienteNome" placeholder="Nome do cliente">
         <input type="text" id="clienteTelefone" placeholder="Telefone">
-        <button id="salvarCliente">Salvar Cliente</button>
       </div>
 
-      <div class="card">
-        <i class="fa-solid fa-dog"></i>
+      <div class="card form-card">
         <h3>Pets</h3>
         <input type="text" id="petNome" placeholder="Nome do pet">
-        <input type="text" id="petRaca" placeholder="Raça">
-        <button id="salvarPet">Salvar Pet</button>
+        <input type="text" id="petTipo" placeholder="Tipo do pet">
       </div>
 
-      <div class="card">
-        <i class="fa-solid fa-calendar-check"></i>
+      <div class="card form-card">
         <h3>Agendamentos</h3>
         <input type="date" id="agendamentoData">
         <input type="time" id="agendamentoHora">
-        <button id="salvarAgendamento">Salvar Agendamento</button>
       </div>
 
-      <div class="card">
-        <i class="fa-solid fa-money-bill-wave"></i>
-        <h3>Pagamentos</h3>
-        <input type="text" id="pagamentoValor" placeholder="Valor do serviço">
-        <input type="text" id="pagamentoForma" placeholder="Forma de pagamento">
-        <button id="salvarPagamento">Salvar Pagamento</button>
+      <div class="card form-card">
+        <h3>Serviços</h3>
+        <select id="servico">
+          <option value="">Selecione um serviço</option>
+          <option>Banho</option>
+          <option>Tosa</option>
+          <option>Consulta</option>
+          <option>Vacinação</option>
+          <option>Hospedagem</option>
+        </select>
+      </div>
+
+      <div class="card form-card">
+        <h3>Pagamento</h3>
+        <input type="number" id="valorPagamento" placeholder="Valor">
+        <select id="formaPagamento">
+          <option value="">Forma de pagamento</option>
+          <option>Pix</option>
+          <option>Cartão de Débito</option>
+          <option>Cartão de Crédito</option>
+          <option>Dinheiro</option>
+        </select>
       </div>
     </div>
 
-    <div class="card" style="margin-top: 30px;">
-      <h3><i class="fa-solid fa-list"></i> Dados Salvos</h3>
-
-      <div id="listaClientes"></div>
-      <div id="listaPets"></div>
-      <div id="listaAgendamentos"></div>
-      <div id="listaPagamentos"></div>
+    <div class="save-area">
+      <button id="salvarTudoBtn">Salvar Todas as Informações</button>
     </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <div class="dados-salvos">
+      <h2>Dados Cadastrados</h2>
+      <div id="resultado"></div>
+    </div>
 </html>
