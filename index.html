@@ -1,123 +1,41 @@
-
+# index.html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema Pet Shop</title>
-  <style>
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #f4f6f9;
-      padding: 20px;
-    }
-
-    h1, h2 {
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    input, select, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    button {
-      background: #2e7d32;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #1b5e20;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    table th, table td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-
-    table th {
-      background: #2e7d32;
-      color: white;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .login {
-      max-width: 400px;
-      margin: 100px auto;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
   <div id="loginScreen" class="login card">
-    <div style="text-align:center; font-size:60px; color:#2e7d32; margin-bottom:15px;">
+    <div class="login-icon">
       <i class="fas fa-paw"></i>
     </div>
-    <h1 style="text-align:center;">Login Pet Shop</h1>
+    <h1>Login Pet Shop</h1>
     <input type="text" id="usuario" placeholder="Usuário">
     <input type="password" id="senha" placeholder="Senha">
     <button onclick="fazerLogin()">Entrar</button>
   </div>
 
   <div id="sistema" class="container hidden">
-    <h1 style="display:flex; align-items:center; gap:10px;">
-      <i class="fas fa-dog" style="color:#2e7d32;"></i>
+    <h1 class="titulo-principal">
+      <i class="fas fa-dog"></i>
       Sistema de Gerenciamento de Pet Shop
     </h1>
 
     <div class="grid">
       <div class="card">
-        <h2><i class="fas fa-user" style="color:#2e7d32;"></i> Cadastrar Cliente</h2>
+        <h2><i class="fas fa-user"></i> Cadastrar Cliente</h2>
         <input type="text" id="nomeCliente" placeholder="Nome do cliente">
         <input type="text" id="telefoneCliente" placeholder="Telefone">
         <button onclick="cadastrarCliente()">Salvar Cliente</button>
       </div>
 
       <div class="card">
-        <h2><i class="fas fa-cat" style="color:#2e7d32;"></i> Cadastrar Animal</h2>
+        <h2><i class="fas fa-cat"></i> Cadastrar Animal</h2>
         <input type="text" id="nomeAnimal" placeholder="Nome do animal">
         <input type="text" id="tipoAnimal" placeholder="Tipo do animal">
         <input type="text" id="donoAnimal" placeholder="Nome do dono">
@@ -125,7 +43,7 @@
       </div>
 
       <div class="card">
-        <h2><i class="fas fa-stethoscope" style="color:#2e7d32;"></i> Registrar Serviço</h2>
+        <h2><i class="fas fa-stethoscope"></i> Registrar Serviço</h2>
         <input type="text" id="animalServico" placeholder="Nome do animal">
         <select id="tipoServico">
           <option>Banho</option>
@@ -139,7 +57,7 @@
     </div>
 
     <div class="card">
-      <h2><i class="fas fa-address-book" style="color:#2e7d32;"></i> Clientes Cadastrados</h2>
+      <h2><i class="fas fa-address-book"></i> Clientes Cadastrados</h2>
       <table>
         <thead>
           <tr>
@@ -152,7 +70,7 @@
     </div>
 
     <div class="card">
-      <h2><i class="fas fa-dog" style="color:#2e7d32;"></i> Animais Cadastrados</h2>
+      <h2><i class="fas fa-dog"></i> Animais Cadastrados</h2>
       <table>
         <thead>
           <tr>
@@ -166,7 +84,7 @@
     </div>
 
     <div class="card">
-      <h2><i class="fas fa-notes-medical" style="color:#2e7d32;"></i> Histórico de Serviços</h2>
+      <h2><i class="fas fa-notes-medical"></i> Histórico de Serviços</h2>
       <table>
         <thead>
           <tr>
@@ -180,103 +98,6 @@
     </div>
   </div>
 
-  <script>
-    let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
-    let animais = JSON.parse(localStorage.getItem('animais')) || [];
-    let servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-
-    function fazerLogin() {
-      const usuario = document.getElementById('usuario').value;
-      const senha = document.getElementById('senha').value;
-
-      if(usuario === 'admin' && senha === '123') {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('sistema').classList.remove('hidden');
-        carregarDados();
-      } else {
-        alert('Usuário ou senha inválidos');
-      }
-    }
-
-    function cadastrarCliente() {
-      const nome = document.getElementById('nomeCliente').value;
-      const telefone = document.getElementById('telefoneCliente').value;
-
-      clientes.push({ nome, telefone });
-      localStorage.setItem('clientes', JSON.stringify(clientes));
-      carregarClientes();
-    }
-
-    function cadastrarAnimal() {
-      const nome = document.getElementById('nomeAnimal').value;
-      const tipo = document.getElementById('tipoAnimal').value;
-      const dono = document.getElementById('donoAnimal').value;
-
-      animais.push({ nome, tipo, dono });
-      localStorage.setItem('animais', JSON.stringify(animais));
-      carregarAnimais();
-    }
-
-    function registrarServico() {
-      const animal = document.getElementById('animalServico').value;
-      const servico = document.getElementById('tipoServico').value;
-      const data = document.getElementById('dataServico').value;
-
-      servicos.push({ animal, servico, data });
-      localStorage.setItem('servicos', JSON.stringify(servicos));
-      carregarServicos();
-    }
-
-    function carregarClientes() {
-      const lista = document.getElementById('listaClientes');
-      lista.innerHTML = '';
-
-      clientes.forEach(cliente => {
-        lista.innerHTML += `
-          <tr>
-            <td>${cliente.nome}</td>
-            <td>${cliente.telefone}</td>
-          </tr>
-        `;
-      });
-    }
-
-    function carregarAnimais() {
-      const lista = document.getElementById('listaAnimais');
-      lista.innerHTML = '';
-
-      animais.forEach(animal => {
-        lista.innerHTML += `
-          <tr>
-            <td>${animal.nome}</td>
-            <td>${animal.tipo}</td>
-            <td>${animal.dono}</td>
-          </tr>
-        `;
-      });
-    }
-
-    function carregarServicos() {
-      const lista = document.getElementById('listaServicos');
-      lista.innerHTML = '';
-
-      servicos.forEach(item => {
-        lista.innerHTML += `
-          <tr>
-            <td>${item.animal}</td>
-            <td>${item.servico}</td>
-            <td>${item.data}</td>
-          </tr>
-        `;
-      });
-    }
-
-    function carregarDados() {
-      carregarClientes();
-      carregarAnimais();
-      carregarServicos();
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
