@@ -24,7 +24,21 @@
 
     const dadosSalvos = JSON.parse(localStorage.getItem('petshopDados'));
 
-    if (dadosSalvos) {
+    if (dadosSalvos && Array.isArray(dadosSalvos)) {
+
+      dadosSalvos.forEach(pet => {
+        petsContainer.innerHTML += `
+          <div class="pet-card">
+            <h2>${pet.petNome}</h2>
+            <p><strong>Tipo do Pet:</strong> ${pet.petTipo}</p>
+            <p><strong>Dono:</strong> ${pet.clienteNome}</p>
+            <p><strong>Telefone do Dono:</strong> ${pet.clienteTelefone}</p>
+          </div>
+        `;
+      });
+
+    } else if (dadosSalvos) {
+      // fallback (se for só um objeto)
       petsContainer.innerHTML = `
         <div class="pet-card">
           <h2>${dadosSalvos.petNome}</h2>
