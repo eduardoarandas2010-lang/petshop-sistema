@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pets - PetShop Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="pagina-container">
+    <header class="topo-pagina">
+      <h1>Pets Cadastrados</h1>
+      <a href="gerenciamento.html" class="btn-voltar">Voltar ao Dashboard</a>
+    </header>
+
+    <section class="lista-pets">
+      <div id="petsContainer"></div>
+    </section>
+  </div>
+
+  <script>
+    const petsContainer = document.getElementById('petsContainer');
+
+    const dadosSalvos = JSON.parse(localStorage.getItem('petshopDados'));
+
+    if (dadosSalvos) {
+      petsContainer.innerHTML = `
+        <div class="pet-card">
+          <h2>${dadosSalvos.petNome}</h2>
+          <p><strong>Tipo do Pet:</strong> ${dadosSalvos.petTipo}</p>
+          <p><strong>Dono:</strong> ${dadosSalvos.clienteNome}</p>
+          <p><strong>Telefone do Dono:</strong> ${dadosSalvos.clienteTelefone}</p>
+        </div>
+      `;
+    } else {
+      petsContainer.innerHTML = `
+        <div class="pet-card vazio">
+          <p>Nenhum pet cadastrado até o momento.</p>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
