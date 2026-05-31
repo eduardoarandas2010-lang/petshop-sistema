@@ -433,3 +433,38 @@ button:hover {
     text-align: center;
   }
 }
+
+.tabela-clientes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabela-clientes th {
+  background: #166534;
+  color: white;
+  padding: 12px;
+}
+
+.tabela-clientes td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.tabela-clientes tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.btn-excluir {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-excluir:hover {
+  background: #b91c1c;
+}
