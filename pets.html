@@ -20,41 +20,76 @@
   </div>
 
   <script>
-    const petsContainer = document.getElementById('petsContainer');
+document.addEventListener('DOMContentLoaded', () => {
 
-    const dadosSalvos = JSON.parse(localStorage.getItem('petshopDados'));
+  const petsContainer = document.getElementById('petsContainer');
 
-    if (dadosSalvos && Array.isArray(dadosSalvos)) {
+  let pets = JSON.parse(localStorage.getItem('petshopDados')) || [];
 
-      dadosSalvos.forEach(pet => {
-        petsContainer.innerHTML += `
-          <div class="pet-card">
-            <h2>${pet.petNome}</h2>
-            <p><strong>Tipo do Pet:</strong> ${pet.petTipo}</p>
-            <p><strong>Dono:</strong> ${pet.clienteNome}</p>
-            <p><strong>Telefone do Dono:</strong> ${pet.clienteTelefone}</p>
-          </div>
-        `;
-      });
+  if (!Array.isArray(pets)) {
+    pets = [pets];
+  }
 
-    } else if (dadosSalvos) {
-      // fallback (se for só um objeto)
-      petsContainer.innerHTML = `
-        <div class="pet-card">
-          <h2>${dadosSalvos.petNome}</h2>
-          <p><strong>Tipo do Pet:</strong> ${dadosSalvos.petTipo}</p>
-          <p><strong>Dono:</strong> ${dadosSalvos.clienteNome}</p>
-          <p><strong>Telefone do Dono:</strong> ${dadosSalvos.clienteTelefone}</p>
-        </div>
-      `;
-    } else {
-      petsContainer.innerHTML = `
-        <div class="pet-card vazio">
-          <p>Nenhum pet cadastrado até o momento.</p>
-        </div>
-      `;
-    }
-  </script>
+  if (pets.length === 0) {
+    petsContainer.innerHTML = `
+      <div class="pet-card vazio">
+        <h2>🐾 Nenhum pet cadastrado</h2>
+        <p>Cadastre um pet no sistema para visualizá-lo aqui.</p>
+      </div>
+    `;
+    return;
+  }
+
+  pets.sort((a, b) =>
+    a.petNome.localeCompare(b.petNome)
+  );
+
+  petsContainer.innerHTML = `
+    <div class="resumo-pets">
+      Total de Pets Cadastrados: <strong>${pets.length}</strong>
+    </div>
+  `;
+
+  pets.forEach(pet => {
+
+    petsContainer.innerHTML += `
+      <div class="pet-card">
+
+        <h2>🐶 ${pet.petNome}</h2>
+
+        <p>
+          <strong>Tipo:</strong>
+          ${pet.petTipo}
+        </p>
+
+        <p>
+          <strong>Dono:</strong>
+          ${pet.clienteNome}
+        </p>
+
+        <p>
+          <strong>Telefone:</strong>
+          ${pet.clienteTelefone}
+        </p>
+
+        <p>
+          <strong>Serviço:</strong>
+          ${pet.servico}
+        </p>
+
+        <p>
+          <strong>Agendamento:</strong>
+          ${pet.agendamentoData}
+          às
+          ${pet.agendamentoHora}
+        </p>
+
+      </div>
+    `;
+  });
+
+});
+</script>
 
 </body>
 </html>
