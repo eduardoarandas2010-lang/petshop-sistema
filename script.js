@@ -31,6 +31,7 @@ if (logoutBtn) {
 }
 
 if (salvarTudoBtn) {
+
   carregarDados();
 
   salvarTudoBtn.addEventListener('click', () => {
@@ -75,6 +76,10 @@ if (salvarTudoBtn) {
     let registros =
       JSON.parse(localStorage.getItem('petshopDados')) || [];
 
+    if (!Array.isArray(registros)) {
+      registros = [];
+    }
+
     registros.push(novoRegistro);
 
     localStorage.setItem(
@@ -83,7 +88,6 @@ if (salvarTudoBtn) {
     );
 
     limparFormulario();
-
     exibirDados();
 
     alert('Cadastro realizado com sucesso!');
@@ -98,8 +102,12 @@ function exibirDados() {
 
   if (!resultado) return;
 
-  const registros =
+  let registros =
     JSON.parse(localStorage.getItem('petshopDados')) || [];
+
+  if (!Array.isArray(registros)) {
+    registros = [registros];
+  }
 
   if (registros.length === 0) {
     resultado.innerHTML = `
@@ -170,6 +178,10 @@ function excluirRegistro(index) {
   let registros =
     JSON.parse(localStorage.getItem('petshopDados')) || [];
 
+  if (!Array.isArray(registros)) {
+    registros = [registros];
+  }
+
   registros.splice(index, 1);
 
   localStorage.setItem(
@@ -179,6 +191,8 @@ function excluirRegistro(index) {
 
   exibirDados();
 }
+
+window.excluirRegistro = excluirRegistro;
 
 function limparFormulario() {
 
