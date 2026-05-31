@@ -22,11 +22,10 @@ if (loginBtn) {
 
 const logoutBtn = document.getElementById('logoutBtn');
 const salvarTudoBtn = document.getElementById('salvarTudoBtn');
-const excluirDadosBtn = document.getElementById('excluirDadosBtn');
 const resultado = document.getElementById('resultado');
 
 if (logoutBtn) {
-  logoutBtn.addEventListener('click', function () {
+  logoutBtn.addEventListener('click', () => {
     window.location.href = 'index.html';
   });
 }
@@ -34,7 +33,8 @@ if (logoutBtn) {
 if (salvarTudoBtn) {
   carregarDados();
 
-  salvarTudoBtn.addEventListener('click', function () {
+  salvarTudoBtn.addEventListener('click', () => {
+
     const clienteNome = document.getElementById('clienteNome').value;
     const clienteTelefone = document.getElementById('clienteTelefone').value;
     const petNome = document.getElementById('petNome').value;
@@ -46,21 +46,21 @@ if (salvarTudoBtn) {
     const formaPagamento = document.getElementById('formaPagamento').value;
 
     if (
-      clienteNome === '' ||
-      clienteTelefone === '' ||
-      petNome === '' ||
-      petTipo === '' ||
-      agendamentoData === '' ||
-      agendamentoHora === '' ||
-      servico === '' ||
-      valorPagamento === '' ||
-      formaPagamento === ''
+      !clienteNome ||
+      !clienteTelefone ||
+      !petNome ||
+      !petTipo ||
+      !agendamentoData ||
+      !agendamentoHora ||
+      !servico ||
+      !valorPagamento ||
+      !formaPagamento
     ) {
-      alert('Preencha todos os campos antes de salvar.');
+      alert('Preencha todos os campos!');
       return;
     }
 
-    const dados = {
+    const novoRegistro = {
       clienteNome,
       clienteTelefone,
       petNome,
@@ -72,125 +72,123 @@ if (salvarTudoBtn) {
       formaPagamento
     };
 
-    localStorage.setItem('petshopDados', JSON.stringify(dados));
-    exibirDados(dados);
+    let registros =
+      JSON.parse(localStorage.getItem('petshopDados')) || [];
 
-    alert('Informações salvas com sucesso!');
+    registros.push(novoRegistro);
+
+    localStorage.setItem(
+      'petshopDados',
+      JSON.stringify(registros)
+    );
+
+    limparFormulario();
+
+    exibirDados();
+
+    alert('Cadastro realizado com sucesso!');
   });
 }
 
 function carregarDados() {
-  const dadosSalvos = localStorage.getItem('petshopDados');
-
-  if (dadosSalvos) {
-    const dados = JSON.parse(dadosSalvos);
-
-    const clienteNome = document.getElementById('clienteNome');
-    const clienteTelefone = document.getElementById('clienteTelefone');
-    const petNome = document.getElementById('petNome');
-    const petTipo = document.getElementById('petTipo');
-    const agendamentoData = document.getElementById('agendamentoData');
-    const agendamentoHora = document.getElementById('agendamentoHora');
-    const servico = document.getElementById('servico');
-    const valorPagamento = document.getElementById('valorPagamento');
-    const formaPagamento = document.getElementById('formaPagamento');
-
-    if (clienteNome) clienteNome.value = dados.clienteNome || '';
-    if (clienteTelefone) clienteTelefone.value = dados.clienteTelefone || '';
-    if (petNome) petNome.value = dados.petNome || '';
-    if (petTipo) petTipo.value = dados.petTipo || '';
-    if (agendamentoData) agendamentoData.value = dados.agendamentoData || '';
-    if (agendamentoHora) agendamentoHora.value = dados.agendamentoHora || '';
-    if (servico) servico.value = dados.servico || '';
-    if (valorPagamento) valorPagamento.value = dados.valorPagamento || '';
-    if (formaPagamento) formaPagamento.value = dados.formaPagamento || '';
-
-    exibirDados(dados);
-  }
+  exibirDados();
 }
 
-function exibirDados(dados) {
+function exibirDados() {
+
   if (!resultado) return;
 
-  resultado.innerHTML = `
-    <div class="resultado-card">
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="clienteNome">
-        <strong>Cliente:</strong> ${dados.clienteNome || ''}
-      </p>
+  const registros =
+    JSON.parse(localStorage.getItem('petshopDados')) || [];
 
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="clienteTelefone">
-        <strong>Telefone:</strong> ${dados.clienteTelefone || ''}
+  if (registros.length === 0) {
+    resultado.innerHTML = `
+      <p style="text-align:center">
+        Nenhum cadastro encontrado.
       </p>
+    `;
+    return;
+  }
 
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="petNome">
-        <strong>Pet:</strong> ${dados.petNome || ''}
-      </p>
-
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="petTipo">
-        <strong>Tipo do Pet:</strong> ${dados.petTipo || ''}
-      </p>
-
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="agendamentoData">
-        <strong>Data:</strong> ${dados.agendamentoData || ''}
-      </p>
-
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="agendamentoHora">
-        <strong>Hora:</strong> ${dados.agendamentoHora || ''}
-      </p>
-
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="servico">
-        <strong>Serviço:</strong> ${dados.servico || ''}
-      </p>
-
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="valorPagamento">
-        <strong>Valor:</strong> R$ ${dados.valorPagamento || ''}
-      </p>
-
-      <p>
-        <input type="checkbox" class="campoExcluir" data-campo="formaPagamento">
-        <strong>Forma de Pagamento:</strong> ${dados.formaPagamento || ''}
-      </p>
-    </div>
+  let tabela = `
+    <table class="tabela-clientes">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Telefone</th>
+          <th>Pet</th>
+          <th>Tipo</th>
+          <th>Data</th>
+          <th>Hora</th>
+          <th>Serviço</th>
+          <th>Valor</th>
+          <th>Pagamento</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
   `;
+
+  registros.forEach((registro, index) => {
+
+    tabela += `
+      <tr>
+        <td>${registro.clienteNome}</td>
+        <td>${registro.clienteTelefone}</td>
+        <td>${registro.petNome}</td>
+        <td>${registro.petTipo}</td>
+        <td>${registro.agendamentoData}</td>
+        <td>${registro.agendamentoHora}</td>
+        <td>${registro.servico}</td>
+        <td>R$ ${registro.valorPagamento}</td>
+        <td>${registro.formaPagamento}</td>
+        <td>
+          <button
+            class="btn-excluir"
+            onclick="excluirRegistro(${index})">
+            Excluir
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  tabela += `
+      </tbody>
+    </table>
+  `;
+
+  resultado.innerHTML = tabela;
 }
 
-if (excluirDadosBtn) {
-  excluirDadosBtn.addEventListener('click', function () {
-    const dadosSalvos = JSON.parse(localStorage.getItem('petshopDados'));
+function excluirRegistro(index) {
 
-    if (!dadosSalvos) {
-      alert('Não há dados salvos para excluir.');
-      return;
-    }
+  if (!confirm('Deseja realmente excluir este cadastro?')) {
+    return;
+  }
 
-    const camposSelecionados = document.querySelectorAll('.campoExcluir:checked');
+  let registros =
+    JSON.parse(localStorage.getItem('petshopDados')) || [];
 
-    if (camposSelecionados.length === 0) {
-      alert('Selecione pelo menos um dado para excluir.');
-      return;
-    }
+  registros.splice(index, 1);
 
-    camposSelecionados.forEach(campo => {
-      const nomeCampo = campo.getAttribute('data-campo');
-      dadosSalvos[nomeCampo] = '';
+  localStorage.setItem(
+    'petshopDados',
+    JSON.stringify(registros)
+  );
 
-      const input = document.getElementById(nomeCampo);
-      if (input) {
-        input.value = '';
-      }
-    });
+  exibirDados();
+}
 
-    localStorage.setItem('petshopDados', JSON.stringify(dadosSalvos));
-    exibirDados(dadosSalvos);
+function limparFormulario() {
 
-    alert('Dados selecionados excluídos com sucesso!');
-  });
+  document.getElementById('clienteNome').value = '';
+  document.getElementById('clienteTelefone').value = '';
+  document.getElementById('petNome').value = '';
+  document.getElementById('petTipo').value = '';
+  document.getElementById('agendamentoData').value = '';
+  document.getElementById('agendamentoHora').value = '';
+  document.getElementById('servico').value = '';
+  document.getElementById('valorPagamento').value = '';
+  document.getElementById('formaPagamento').value = '';
 }
