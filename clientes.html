@@ -20,27 +20,85 @@
   </div>
 
   <script>
-    const clientesContainer = document.getElementById('clientesContainer');
+document.addEventListener('DOMContentLoaded', () => {
 
-    const dadosSalvos = JSON.parse(localStorage.getItem('petshopDados'));
+  const clientesContainer =
+    document.getElementById('clientesContainer');
 
-    if (dadosSalvos) {
-      clientesContainer.innerHTML = `
-        <div class="cliente-card">
-          <h2>${dadosSalvos.clienteNome}</h2>
-          <p><strong>Telefone:</strong> ${dadosSalvos.clienteTelefone}</p>
-          <p><strong>Pet:</strong> ${dadosSalvos.petNome}</p>
-          <p><strong>Tipo do Pet:</strong> ${dadosSalvos.petTipo}</p>
-        </div>
-      `;
-    } else {
-      clientesContainer.innerHTML = `
-        <div class="cliente-card vazio">
-          <p>Nenhum cliente cadastrado até o momento.</p>
-        </div>
-      `;
-    }
-  </script>
+  let clientes =
+    JSON.parse(localStorage.getItem('petshopDados')) || [];
+
+  if (!Array.isArray(clientes)) {
+    clientes = [clientes];
+  }
+
+  if (clientes.length === 0) {
+
+    clientesContainer.innerHTML = `
+      <div class="cliente-card vazio">
+        <p>Nenhum cliente cadastrado até o momento.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  clientes.sort((a, b) =>
+    a.clienteNome.localeCompare(b.clienteNome)
+  );
+
+  clientesContainer.innerHTML = '';
+
+  clientes.forEach((cliente) => {
+
+    clientesContainer.innerHTML += `
+      <div class="cliente-card">
+
+        <h2>${cliente.clienteNome}</h2>
+
+        <p>
+          <strong>Telefone:</strong>
+          ${cliente.clienteTelefone}
+        </p>
+
+        <p>
+          <strong>Pet:</strong>
+          ${cliente.petNome}
+        </p>
+
+        <p>
+          <strong>Tipo do Pet:</strong>
+          ${cliente.petTipo}
+        </p>
+
+        <p>
+          <strong>Serviço:</strong>
+          ${cliente.servico}
+        </p>
+
+        <p>
+          <strong>Agendamento:</strong>
+          ${cliente.agendamentoData}
+          às
+          ${cliente.agendamentoHora}
+        </p>
+
+        <p>
+          <strong>Pagamento:</strong>
+          ${cliente.formaPagamento}
+        </p>
+
+        <p>
+          <strong>Valor:</strong>
+          R$ ${cliente.valorPagamento}
+        </p>
+
+      </div>
+    `;
+  });
+
+});
+</script>
 
 </body>
 </html>
